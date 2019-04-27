@@ -1,6 +1,7 @@
 package UI;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.myapplication.Activities.DetailActivity;
 import com.example.myapplication.R;
 
 import java.util.List;
@@ -77,7 +79,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Go to detail activity
+                    int position = getAdapterPosition();
+
+                    Item item = itemList.get(position);
+
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra("itemID",item.getId());
+                    intent.putExtra("itemName",item.getItemName());
+                    intent.putExtra("itemQuantity",item.getItemQuantity());
+                    intent.putExtra("itemDate",item.getItemDateCreated());
+                    context.startActivity(intent);
                 }
             });
 

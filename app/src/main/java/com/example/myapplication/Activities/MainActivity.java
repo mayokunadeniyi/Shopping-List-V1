@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         db = new DataBaseHandler(this);
 
+        skipPopUp();
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,8 +133,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    private void skipPopUp(){
-//        if (db.getAllItemsCount() > 0)
-//            startActivity(new Intent(getApplicationContext(),ListActivity.class));
-//    }
+    private void skipPopUp(){
+        if (db.getAllItemsCount() > 0)
+            startActivity(new Intent(MainActivity.this,ListActivity.class));
+        finish();
+    }
 }
