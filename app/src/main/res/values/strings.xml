@@ -6,4 +6,8 @@
     <string name="grocery_item">Item Name</string>
     <string name="grocery_quantity">Quantity</string>
     <string name="save_button">Save</string>
+    <string name="title_activity_list">ListActivity</string>
+    <string name="item_name">Item Name</string>
+    <string name="qtyText">Qty</string>
+    <string name="date_added_on">Added On</string>
 </resources>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="@string/item_name"/>
+            <LinearLayout
+                android:id="@+id/firstLinear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name"
+                android:paddingTop="5dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/staticText1"
+                    android:layout_width="wrap_content"
+                    android:textStyle="italic"
+                    android:text="@string/qtyText"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="wrap_content"
+
+                    />
+                <TextView
+                    android:id="@+id/quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/name"
+                    android:textStyle="italic"
+                    android:text="Quantity"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/secondLinear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/firstLinear"
+                android:paddingTop="5dp">
+                <TextView
+                    android:id="@+id/staticText2"
+                    android:text="@string/date_added_on"
+                    android:layout_width="wrap_content"
+                    android:textStyle="italic"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dataAdded"
+                    android:text="date"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+
+
+            <TableRow
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_alignBottom="@id/secondLinear"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/editBtn"
+                    android:layout_height="30dp"
+                    android:layout_width="30dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@android:drawable/ic_menu_edit"/>
+                <Button
+                    android:id="@+id/deleteBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@android:drawable/ic_delete"/>
+
+            </TableRow>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
