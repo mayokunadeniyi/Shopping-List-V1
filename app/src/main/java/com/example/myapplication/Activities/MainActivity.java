@@ -1,7 +1,9 @@
 package com.example.myapplication.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -13,8 +15,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
+
+import Data.DataBaseHandler;
+import Model.Item;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText itemName;
     private EditText itemQuantity;
     private Button saveButton;
-    private Context context;
+    private DataBaseHandler db;
 
 
     @Override
@@ -32,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        db = new DataBaseHandler(this);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +90,22 @@ public class MainActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveItemToDB(v);
+
+                if (!itemName.getText().toString().isEmpty() && !itemQuantity.getText().toString().isEmpty()) {
+                    saveItemToDB(v);
+                }else if (itemName.getText().toString().isEmpty() && !itemQuantity.getText().toString().isEmpty()){
+
+                    Toast.makeText(getApplicationContext(),"Item Name is Empty",Toast.LENGTH_SHORT).show();
+
+                }else if (!itemName.getText().toString().isEmpty() && itemQuantity.getText().toString().isEmpty()){
+
+                    Toast.makeText(getApplicationContext(),"Item Quantity is Empty",Toast.LENGTH_SHORT).show();
+
+                }else if (itemName.getText().toString().isEmpty() && itemQuantity.getText().toString().isEmpty()){
+
+                    Toast.makeText(getApplicationContext(),"Item Name and Quantity are Empty",Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
 
@@ -90,5 +113,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void saveItemToDB(View v) {
 
+        Item item = new Item();
+        item.setItemName(itemName.getText().toString());
+        item.setItemQuantity(itemQuantity.getText().toString());
+
+        db.addNewItem(item);
+        Snackbar.make(v,"Item Saved!",Snackbar.LENGTH_LONG).show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+               alertDialog.dismiss();
+               startActivity(new Intent(MainActivity.this,ListActivity.class));
+            }
+        },1200);
+
+
     }
+
+//    private void skipPopUp(){
+//        if (db.getAllItemsCount() > 0)
+//            startActivity(new Intent(getApplicationContext(),ListActivity.class));
+//    }
 }

@@ -37,6 +37,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull RecyclerViewAdapter.ViewHolder viewHolder, int i) {
 
         Item item = itemList.get(i);
+        viewHolder.itemName.setText(item.getItemName());
+        viewHolder.itemQuantity.setText(item.getItemQuantity());
+        viewHolder.dateCreated.setText(item.getItemDateCreated());
 
 
     }
@@ -53,6 +56,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public TextView dateCreated;
         public Button deleteItem;
         public Button editItem;
+        public int id;
 
         public ViewHolder(@NonNull View itemView, Context ctx) {
             super(itemView);
@@ -73,7 +77,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    
+                    //Go to detail activity
                 }
             });
 
