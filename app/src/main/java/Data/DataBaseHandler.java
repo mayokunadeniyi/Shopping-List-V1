@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -89,26 +90,59 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
     //Getting all items
     public List<Item> getAllItem(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Item> itemList = new ArrayList<>();
+        Cursor cursor = db.query(Constants.TABLE_NAME,new String[]{Constants.KEY_ID,Constants.KEY_ITEM_NAME,
+                Constants.KEY_QUANTITY,Constants.KEY_DATE_ADDED},null,null,null,null,
+                Constants.KEY_DATE_ADDED + " DESC");
+        if (cursor.moveToFirst()){
+            do {
+                Item item = new Item();
+                item.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(Constants.KEY_ID))));
+                item.setItemName(cursor.getString(cursor.getColumnIndex(Constants.KEY_ITEM_NAME)));
+                item.setItemQuantity(cursor.getString(cursor.getColumnIndex(Constants.KEY_QUANTITY)));
 
-        return null;
+                //invoke the date format
+
+                java.text.DateFormat dateFormat = java.text.DateFormat.getDateInstance();
+                String formated_date = dateFormat.format(new Date(cursor.getLong(
+                        cursor.getColumnIndex(Constants.KEY_DATE_ADDED))).getTime());
+                item.setItemDateCreated(formated_date);
+
+                //Add each item to item list
+                itemList.add(item);
+
+            }while (cursor.moveToNext());
+        }
+
+        return itemList;
     }
 
     //update an Item
     public int updateItem(Item item){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Constants.KEY_ITEM_NAME,item.getItemName());
+        contentValues.put(Constants.KEY_QUANTITY,item.getItemQuantity());
+        contentValues.put(Constants.KEY_DATE_ADDED,java.lang.System.currentTimeMillis());
 
-        return 0;
+       return db.update(Constants.TABLE_NAME,contentValues,Constants.KEY_ID + "=?",
+                new String[]{String.valueOf(item.getId())});
     }
 
     //delete an Item
     public void deleteItem(int id){
-
-        return;
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(Constants.TABLE_NAME,Constants.KEY_ID + "=?",
+                new String[]{String.valueOf(id)});
+        db.close();
     }
 
     //get all Items counted
     public int getAllItemsCount(){
-
-        return 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + Constants.TABLE_NAME, null);
+        return cursor.getCount();
     }
 
 
