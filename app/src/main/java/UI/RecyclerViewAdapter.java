@@ -1,5 +1,6 @@
 package UI;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -9,15 +10,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.Activities.DetailActivity;
 import com.example.myapplication.R;
 
 import java.util.List;
 
+import Data.DataBaseHandler;
 import Model.Item;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+
+    private AlertDialog.Builder alertDialogBuilder;
+    private AlertDialog dialog;
+    private LayoutInflater inflater;
 
     private Context context;
     private List<Item> itemList;
@@ -98,8 +105,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.deleteBtn:
-                    //TODO: Delete
-                    break;
+                    int position = getAdapterPosition();
+                    Item item = itemList.get(position);
+                    deleteItem(item.getId());
+
+
                 case R.id.editBtn:
                     //TODO: Edit
                     break;
@@ -107,5 +117,45 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
 
         }
+
+        public void deleteItem(final int id){
+
+            //create alert dialogue
+
+            alertDialogBuilder = new AlertDialog.Builder(context);
+            inflater = LayoutInflater.from(context);
+            View view = inflater.inflate(R.layout.confirmation_dialogue,null);
+
+            Button yesButton = (Button) view.findViewById(R.id.yes_button);
+            Button noButton = (Button) view.findViewById(R.id.no_button);
+
+            alertDialogBuilder.setView(view);
+            dialog = alertDialogBuilder.create();
+            dialog.show();
+
+            //On click listeners for the buttons
+            yesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DataBaseHandler db = new DataBaseHandler(context);
+                    db.deleteItem(id);
+
+                    itemList.remove(getAdapterPosition());
+                    notifyItemRemoved(getAdapterPosition());
+
+                    dialog.dismiss();
+                }
+            });
+
+            noButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+
+        }
+
     }
 }

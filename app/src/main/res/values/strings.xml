@@ -10,4 +10,7 @@
     <string name="item_name">Item Name</string>
     <string name="qtyText">Qty</string>
     <string name="date_added_on">Added On</string>
+    <string name="delete_text">Are You Sure ?</string>
+    <string name="yes_button">Yes</string>
+    <string name="no_button">No</string>
 </resources>
