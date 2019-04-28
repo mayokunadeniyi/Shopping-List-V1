@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -111,13 +112,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
                 case R.id.editBtn:
-                    //TODO: Edit
+                    int position1 = getAdapterPosition();
+                    Item item1 = itemList.get(position1);
+                    editItem(item1);
                     break;
 
             }
 
         }
 
+        //Delete an Item method
         public void deleteItem(final int id){
 
             //create alert dialogue
@@ -153,6 +157,42 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     dialog.dismiss();
                 }
             });
+
+
+        }
+
+        public void editItem(final Item item){
+            alertDialogBuilder = new AlertDialog.Builder(context);
+            View view = LayoutInflater.from(context).inflate(R.layout.popup,null);
+
+            TextView titleText = (TextView) view.findViewById(R.id.title);
+            final EditText itemName = (EditText) view.findViewById(R.id.itemNameID);
+            final EditText itemQuantity = (EditText) view.findViewById(R.id.itemQuantityID);
+            Button saveButton = (Button) view.findViewById(R.id.save_item_button);
+
+            titleText.setText("Update Item");
+
+            alertDialogBuilder.setView(view);
+            dialog = alertDialogBuilder.create();
+            dialog.show();
+
+            saveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DataBaseHandler db = new DataBaseHandler(context);
+                    item.setItemName(itemName.getText().toString());
+                    item.setItemQuantity(itemQuantity.getText().toString());
+
+                    if (!itemName.getText().toString().isEmpty() && !itemQuantity.getText().toString().isEmpty()){
+                        db.updateItem(item);
+                        notifyItemChanged(getAdapterPosition(),item);
+                        dialog.dismiss();
+                    }else {
+                        Toast.makeText(context,"Enter new values for this item",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
 
 
         }
