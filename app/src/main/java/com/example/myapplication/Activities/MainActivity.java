@@ -134,8 +134,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void skipPopUp(){
-        if (db.getAllItemsCount() > 0)
-            startActivity(new Intent(MainActivity.this,ListActivity.class));
-        finish();
+        if (db.getAllItemsCount() > 0) {
+            startActivity(new Intent(MainActivity.this, ListActivity.class));
+            finish();
+        }
     }
 }

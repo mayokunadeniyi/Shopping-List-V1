@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication.Activities.DetailActivity;
 import com.example.myapplication.R;
 
 import java.util.List;
@@ -83,22 +82,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             deleteItem.setOnClickListener(this);
             editItem.setOnClickListener(this);
 
-            //Onclick event for the view
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-
-                    Item item = itemList.get(position);
-
-                    Intent intent = new Intent(context, DetailActivity.class);
-                    intent.putExtra("itemID",item.getId());
-                    intent.putExtra("itemName",item.getItemName());
-                    intent.putExtra("itemQuantity",item.getItemQuantity());
-                    intent.putExtra("itemDate",item.getItemDateCreated());
-                    context.startActivity(intent);
-                }
-            });
 
         }
 
@@ -109,6 +92,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     int position = getAdapterPosition();
                     Item item = itemList.get(position);
                     deleteItem(item.getId());
+                    break;
 
 
                 case R.id.editBtn:
@@ -122,7 +106,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
 
         //Delete an Item method
-        public void deleteItem(final int id){
+        private void deleteItem(final int id){
 
             //create alert dialogue
 
@@ -141,11 +125,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             yesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DataBaseHandler db = new DataBaseHandler(context);
+                    DataBaseHandler db = new DataBaseHandler(v.getContext());
                     db.deleteItem(id);
 
                     itemList.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
+                    notifyItemRangeChanged(getAdapterPosition(),itemList.size());
+
 
                     dialog.dismiss();
                 }
@@ -161,18 +147,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         }
 
-        public void editItem(final Item item){
+        private void editItem(final Item item){
             alertDialogBuilder = new AlertDialog.Builder(context);
-            View view = LayoutInflater.from(context).inflate(R.layout.popup,null);
+            View view1 = LayoutInflater.from(context).inflate(R.layout.popup,null);
 
-            TextView titleText = (TextView) view.findViewById(R.id.title);
-            final EditText itemName = (EditText) view.findViewById(R.id.itemNameID);
-            final EditText itemQuantity = (EditText) view.findViewById(R.id.itemQuantityID);
-            Button saveButton = (Button) view.findViewById(R.id.save_item_button);
+            TextView titleText = (TextView) view1.findViewById(R.id.title);
+            final EditText itemName = (EditText) view1.findViewById(R.id.itemNameID);
+            final EditText itemQuantity = (EditText) view1.findViewById(R.id.itemQuantityID);
+            Button saveButton = (Button) view1.findViewById(R.id.save_item_button);
 
             titleText.setText("Update Item");
 
-            alertDialogBuilder.setView(view);
+            alertDialogBuilder.setView(view1);
             dialog = alertDialogBuilder.create();
             dialog.show();
 
