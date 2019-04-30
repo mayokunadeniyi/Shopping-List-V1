@@ -69,7 +69,7 @@ public class ListActivity extends AppCompatActivity {
         //Get all items from DataBase
         itemList = db.getAllItem();
 
-        for (Item I : itemList){
+        for (Item I : itemList) {
 
             Item item = new Item();
             item.setItemName(I.getItemName());
@@ -80,17 +80,16 @@ public class ListActivity extends AppCompatActivity {
 
         }
 
-        recyclerViewAdapter = new RecyclerViewAdapter(this,list);
+        recyclerViewAdapter = new RecyclerViewAdapter(this, list);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerViewAdapter.notifyDataSetChanged();
 
 
-
     }
 
-    private void createNewItem(){
+    private void createNewItem() {
         alertDialogueBuilder = new AlertDialog.Builder(this);
-        View view = LayoutInflater.from(this).inflate(R.layout.popup,null);
+        View view = LayoutInflater.from(this).inflate(R.layout.popup, null);
 
         final Item item = new Item();
 
@@ -106,35 +105,35 @@ public class ListActivity extends AppCompatActivity {
         saveItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!itemName.getText().toString().isEmpty() && !itemQuantity.getText().toString().isEmpty() ){
+                if (!itemName.getText().toString().isEmpty() && !itemQuantity.getText().toString().isEmpty()) {
 
 
                     saveItemTODB(v);
 
-                }else if (itemName.getText().toString().isEmpty() && !itemQuantity.getText().toString().isEmpty()){
+                } else if (itemName.getText().toString().isEmpty() && !itemQuantity.getText().toString().isEmpty()) {
 
-                    Toast.makeText(getApplicationContext(),"Item Name is Empty",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Item Name is Empty", Toast.LENGTH_SHORT).show();
 
-                }else if (!itemName.getText().toString().isEmpty() && itemQuantity.getText().toString().isEmpty()){
+                } else if (!itemName.getText().toString().isEmpty() && itemQuantity.getText().toString().isEmpty()) {
 
-                    Toast.makeText(getApplicationContext(),"Item Quantity is Empty",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Item Quantity is Empty", Toast.LENGTH_SHORT).show();
 
-                }else if (itemName.getText().toString().isEmpty() && itemQuantity.getText().toString().isEmpty()){
+                } else if (itemName.getText().toString().isEmpty() && itemQuantity.getText().toString().isEmpty()) {
 
-                    Toast.makeText(getApplicationContext(),"Item Name and Quantity are Empty",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Item Name and Quantity are Empty", Toast.LENGTH_SHORT).show();
 
                 }
             }
         });
     }
 
-    public void saveItemTODB(View v){
+    public void saveItemTODB(View v) {
         Item item = new Item();
         item.setItemName(itemName.getText().toString());
         item.setItemQuantity(itemQuantity.getText().toString());
 
         db.addNewItem(item);
-        Snackbar.make(v,"Item Saved!",Snackbar.LENGTH_LONG).show();
+        Snackbar.make(v, "Item Saved!", Snackbar.LENGTH_LONG).show();
         recyclerViewAdapter.notifyItemInserted(v.getId());
 
         new Handler().postDelayed(new Runnable() {
@@ -142,27 +141,7 @@ public class ListActivity extends AppCompatActivity {
             public void run() {
                 dialog.dismiss();
             }
-        },1000);
+        }, 1000);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (db.getAllItemsCount() == 0){
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finishAndRemoveTask();
-
-    }
 }
