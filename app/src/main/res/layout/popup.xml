@@ -22,20 +22,24 @@
                 android:textSize="18sp"
                 android:textStyle="italic"
                 android:text="@string/popup_title" />
+
             <EditText
                 android:id="@+id/itemNameID"
-                android:hint="@string/grocery_item"
                 android:layout_width="match_parent"
-                android:layout_marginTop="8dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/title"/>
+                android:layout_below="@id/title"
+                android:layout_marginTop="8dp"
+                android:hint="@string/grocery_item"
+                android:inputType="textCapWords" />
+
             <EditText
                 android:id="@+id/itemQuantityID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/itemNameID"
                 android:layout_marginTop="15dp"
                 android:hint="@string/grocery_quantity"
-                android:layout_below="@id/itemNameID"/>
+                android:inputType="number|numberDecimal" />
 
             <Button
                 android:id="@+id/save_item_button"

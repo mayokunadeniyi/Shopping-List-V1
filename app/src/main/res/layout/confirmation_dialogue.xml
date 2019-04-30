@@ -25,20 +25,20 @@
                 android:id="@+id/yes_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:textColor="#FFF"
                 android:layout_below="@id/textAlert"
-                android:layout_marginTop="19dp"
-                android:textStyle="bold"
-                android:text="@string/yes_button"/>
+                android:layout_marginTop="40dp"
+                android:background="@drawable/button_background"
+                android:text="@string/yes_button"
+                android:textColor="#FFF"
+                android:textStyle="bold" />
             <Button
                 android:id="@+id/no_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@id/textAlert"
-                android:layout_marginTop="19dp"
-                android:background="@color/colorAccent"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/button_background"
                 android:textColor="#FFF"
                 android:textStyle="bold"
                 android:text="@string/no_button"/>
