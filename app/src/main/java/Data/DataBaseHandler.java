@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -86,7 +85,6 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             item.setItemDateCreated(formated_date);
 
         }
-        db.close();
         return item;
     }
 
@@ -117,7 +115,6 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             }while (cursor.moveToNext());
         }
 
-        db.close();
         return itemList;
     }
 
@@ -136,7 +133,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     //delete an Item
     public void deleteItem(int id){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(Constants.TABLE_NAME,Constants.KEY_ID + " =?", new String[]{Integer.toString(id)}) ;
+        db.delete(Constants.TABLE_NAME,Constants.KEY_ID + " =?", new String[]{String.valueOf(id)}) ;
         db.close();
     }
 
