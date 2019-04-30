@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!itemName.getText().toString().isEmpty() && !itemQuantity.getText().toString().isEmpty()) {
                     saveItemToDB(v);
+                    recreate();
                 }else if (itemName.getText().toString().isEmpty() && !itemQuantity.getText().toString().isEmpty()){
 
                     Toast.makeText(getApplicationContext(),"Item Name is Empty",Toast.LENGTH_SHORT).show();

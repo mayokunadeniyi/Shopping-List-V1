@@ -55,6 +55,7 @@ public class ListActivity extends AppCompatActivity {
                 createNewItem();
 
 
+
             }
         });
 
@@ -140,8 +141,9 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void run() {
                 dialog.dismiss();
+                startActivity(getIntent());
             }
-        }, 1000);
+        }, 1);
     }
 
 }
