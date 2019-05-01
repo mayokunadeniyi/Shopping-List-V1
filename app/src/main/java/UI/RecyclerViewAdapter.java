@@ -129,7 +129,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 public void onClick(View v) {
                     DataBaseHandler db = new DataBaseHandler(v.getContext());
                     db.deleteItem(id);
-
                     itemList.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
                     notifyItemRangeChanged(getAdapterPosition(),itemList.size());
