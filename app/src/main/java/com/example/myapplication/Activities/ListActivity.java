@@ -76,6 +76,7 @@ public class ListActivity extends AppCompatActivity {
             item.setItemName(I.getItemName());
             item.setItemQuantity(I.getItemQuantity());
             item.setItemDateCreated(I.getItemDateCreated());
+            item.setId(I.getId());
 
             list.add(item);
 
