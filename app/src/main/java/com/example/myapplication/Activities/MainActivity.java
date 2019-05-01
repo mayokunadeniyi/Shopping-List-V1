@@ -46,31 +46,12 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
+
                 createPopupDialog();
             }
         });
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     public void createPopupDialog(){
 
@@ -91,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!itemName.getText().toString().isEmpty() && !itemQuantity.getText().toString().isEmpty()) {
                     saveItemToDB(v);
-                    recreate();
                 }else if (itemName.getText().toString().isEmpty() && !itemQuantity.getText().toString().isEmpty()){
 
                     Toast.makeText(getApplicationContext(),"Item Name is Empty",Toast.LENGTH_SHORT).show();
@@ -117,15 +97,11 @@ public class MainActivity extends AppCompatActivity {
         item.setItemQuantity(itemQuantity.getText().toString());
 
         db.addNewItem(item);
-        Snackbar.make(v,"Item Saved!",Snackbar.LENGTH_LONG).show();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-               alertDialog.dismiss();
-               startActivity(new Intent(MainActivity.this,ListActivity.class));
-            }
-        },1200);
+        Toast.makeText(getApplicationContext(),"Item Saved",Toast.LENGTH_SHORT).show();
+        alertDialog.dismiss();
+        startActivity(new Intent(getApplicationContext(),ListActivity.class));
+        finish();
 
 
     }

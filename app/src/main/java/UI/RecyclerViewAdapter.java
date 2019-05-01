@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.Activities.MainActivity;
 import com.example.myapplication.R;
 
 import java.util.List;
@@ -114,7 +115,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             alertDialogBuilder = new AlertDialog.Builder(context);
             inflater = LayoutInflater.from(context);
-            View view = inflater.inflate(R.layout.confirmation_dialogue,null);
+            final View view = inflater.inflate(R.layout.confirmation_dialogue,null);
 
             Button yesButton = (Button) view.findViewById(R.id.yes_button);
             Button noButton = (Button) view.findViewById(R.id.no_button);
@@ -132,9 +133,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     itemList.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
                     notifyItemRangeChanged(getAdapterPosition(),itemList.size());
-
-
                     dialog.dismiss();
+
+                    //Check if Database is empty
+                    if (db.getAllItemsCount() == 0){
+                        context.startActivity(new Intent(v.getContext(), MainActivity.class));
+                    }
                 }
             });
 

@@ -51,9 +51,6 @@ public class ListActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 createNewItem();
-
-
-
             }
         });
 
@@ -134,7 +131,6 @@ public class ListActivity extends AppCompatActivity {
 
         db.addNewItem(item);
         Snackbar.make(v, "Item Saved!", Snackbar.LENGTH_LONG).show();
-        recyclerViewAdapter.notifyItemInserted(v.getId());
 
         new Handler().postDelayed(new Runnable() {
             @Override
