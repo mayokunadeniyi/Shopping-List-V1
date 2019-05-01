@@ -1,4 +1,4 @@
-[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)] ![License](https://img.shields.io/github/license/mayokunthefirst/Shopping-List.svg) [![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-red.svg?style=flat)](http://makeapullrequest.com)
+![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg) ![License](https://img.shields.io/github/license/mayokunthefirst/Shopping-List.svg)  [![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-red.svg?style=flat)](http://makeapullrequest.com)  ![Language](https://img.shields.io/github/languages/top/mayokunthefirst/shopping-list.svg)
 <p align="center"><a href="https://github.com/mayokunthefirst/Shopping-List"><img src="https://user-images.githubusercontent.com/29807085/57045254-ebcb2800-6c64-11e9-9b89-82b4a0ccc257.png" width="150"></a></p> 
 
 # Shopping List
