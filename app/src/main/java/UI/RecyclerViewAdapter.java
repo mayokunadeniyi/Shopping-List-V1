@@ -138,6 +138,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     //Check if Database is empty
                     if (db.getAllItemsCount() == 0){
                         context.startActivity(new Intent(v.getContext(), MainActivity.class));
+
                     }
                 }
             });
