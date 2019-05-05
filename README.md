@@ -45,7 +45,7 @@ git clone https://github.com/username/Shopping-List.git
 If you would love to contribute to the app or add a new feature, please fork the project and submit a pull request. Whether you have ideas, translations, design changes, code cleaning, or real heavy code changes, help is always welcome. The more it is done the better it gets!
 
 
-## Developed with love by
+## Author
 
 * Mayokun Adeniyi   ![Twitter](https://img.shields.io/twitter/follow/mayokunadeniyi.svg?style=social)
 
